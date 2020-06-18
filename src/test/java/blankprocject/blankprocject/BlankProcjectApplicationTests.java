@@ -17,7 +17,7 @@ class BlankProcjectApplicationTests {
 	void teste() {
 		Teste teste = new Teste();
 
-		Boolean num = teste.testeNumerico(2, 2);
+		Boolean num = teste.testeNumerico(1, 2);
 
 		assertTrue(num);
 	}
