@@ -7,7 +7,7 @@ COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 
-RUN ./mvnw package -DskipTests
+RUN ./mvnw package
 
 FROM openjdk:14
 

@@ -15,11 +15,9 @@ class BlankProcjectApplicationTests {
 
 	@Test
 	void teste() {
-		Teste teste = new Teste();
+		final int num = new Teste().testeNumerico(1, 2);
 
-		Boolean num = teste.testeNumerico(1, 2);
-
-		assertTrue(num);
+		assertTrue(num == 0 ? true : false);
 	}
 
 }

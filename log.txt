@@ -1,0 +1,4 @@
+* [31m41ded67	[32m (HEAD -> tests, origin/tests)[0m force error unit test
+* [31mffe4969	[32m[0m implements tests
+* [31ma485aca	[32m (origin/sonar-test, sonar-test)[0m add dockerfile
+* [31m8fe16a9	[32m (origin/master, origin/HEAD, master)[0m first commit
