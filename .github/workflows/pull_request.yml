@@ -7,50 +7,40 @@ name: CI
 on:
   pull_request:
     types: [opened, edited, reopened, synchronize]
-    branches: [ master, sonar-test, tests ]
+    branches:
+      - master
+      - sonar-test
+      - tests
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - name: 'Checkout repository on branch: ${{ github.REF }}'
-      uses: actions/checkout@v2
-      with:
-        ref: ${{ github.HEAD_REF }}
+      - name: Setup sonarqube
+        uses: warchant/setup-sonar-scanner@v1
 
-    - name: 'Setup sonar scanner'
-      uses: warchant/setup-sonar-scanner@v1
+      - name: 'Checkout repository on branch: ${{ github.REF }}'
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.HEAD_REF }}
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
+      - name: Retrieve entire repository history
+        run: |
+          git fetch --prune --unshallow
 
-    - name: Retrieve entire repository history
-      run: |
-        git fetch --prune --unshallow
-
-    - name: 'Analisando pull-request'
-      env:
-        # to get access to secrets.SONAR_TOKEN, provide GITHUB_TOKEN
-        GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
-      run: sonar-scanner
-        -Dsonar.host.url=${{ secrets.SONAR_URL }}
-        -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-        -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-        -Dsonar.pullrequest.key=${{ github.event.number }}
-        -Dsonar.pullrequest.branch=${{ github.HEAD_REF }}
-        -Dsonar.pullrequest.base=${{ github.BASE_REF }}
-        -Dsonar.pullrequest.github.repository=${{ github.repository }}
-        -Dsonar.scm.provider=git
-        -Dsonar.java.binaries=/tmp
-
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
-      run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+      - name: Run an analysis of the PR
+        env:
+          # to get access to secrets.SONAR_TOKEN, provide GITHUB_TOKEN
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+        run: sonar-scanner
+          -Dsonar.host.url=${{ secrets.SONAR_URL }}
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+          -Dsonar.pullrequest.key=${{ github.event.number }}
+          -Dsonar.pullrequest.branch=${{ github.HEAD_REF }}
+          -Dsonar.pullrequest.base=${{ github.BASE_REF }}
+          -Dsonar.pullrequest.github.repository=${{ github.repository }}
+          -Dsonar.scm.provider=git
+          -Dsonar.java.binaries=/tmp
