@@ -24,6 +24,7 @@ jobs:
       - name: 'Checkout repository on branch: ${{ github.REF }}'
         uses: actions/checkout@v2
         with:
+          fetch-depth: ''
           ref: ${{ github.HEAD_REF }}
 
       - name: Retrieve entire repository history
@@ -39,8 +40,8 @@ jobs:
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
           -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
           -Dsonar.pullrequest.key=${{ github.event.number }}
-          -Dsonar.pullrequest.branch=${{ github.HEAD_REF }}
+          -Dsonar.pullrequest.branch=${{ github.event.pull_request.head.ref }}
           -Dsonar.pullrequest.base=${{ github.BASE_REF }}
-          -Dsonar.pullrequest.github.repository=${{ github.repository }}
+          -Dsonar.scm.revision=${{ github.event.pull_request.head.sha }}
           -Dsonar.scm.provider=git
           -Dsonar.java.binaries=/tmp
