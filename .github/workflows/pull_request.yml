@@ -30,6 +30,10 @@ jobs:
     - name: Run a one-line script
       run: echo Hello, world!
 
+    - name: Retrieve entire repository history
+      run: |
+        git fetch --prune --unshallow
+
     - name: 'Analisando pull-request'
       env:
         # to get access to secrets.SONAR_TOKEN, provide GITHUB_TOKEN
