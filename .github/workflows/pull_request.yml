@@ -32,7 +32,7 @@ jobs:
         # to get access to secrets.SONAR_TOKEN, provide GITHUB_TOKEN
         GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
       run: sonar-scanner
-        -Dsonar.host.url= https://sonarqube.saas-solinftec.com
+        -Dsonar.host.url= ${{ secrets.SONAR_URL }}
         -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
         -Dsonar.pullrequest.key=${{ github.event.number }}
