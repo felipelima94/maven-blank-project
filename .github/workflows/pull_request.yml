@@ -16,8 +16,5 @@ jobs:
       with:
         java-version: 11
 
-    - name: Maven Clean Package
-      run: mvn clean package -DskipTests
-
     - name: Maven Teste
-      run: mvn test
+      run: mvn clean test
