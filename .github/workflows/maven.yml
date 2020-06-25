@@ -1,8 +1,8 @@
-name: Java CI with Maven
+name: Sonar tests
 
 on:
   pull_request:
-    branches: [ master, homologation, development ]
+    branches: [ master, sonar-test, tests ]
 
 jobs:
   build:
@@ -17,10 +17,12 @@ jobs:
         java-version: 11
 
     - name: Build with Maven
-      run: mvn package
+      run: mvn package -DskipTests
 
     - name: Teste Sonar
       run: mvn sonar:sonar
           -Dsonar.host.url=${{ secrets.SONAR_URL }}
           -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+          -Dsonar.verbose=true
+          -Dsonar.tests=src/test 
