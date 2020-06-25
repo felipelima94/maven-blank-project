@@ -13,7 +13,7 @@ class BlankProcjectApplicationTests {
 
 	@Test
 	void teste() {
-		final int num = new Teste().testeNumerico(1, 2);
+		final int num = new Teste().testeNumerico(1, 1);
 
 		assertTrue(num == 0 ? true : false);
 	}
