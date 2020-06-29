@@ -9,6 +9,7 @@ class BlankProcjectApplicationTests {
 
 	@Test
 	void contextLoads() {
+		assertTrue(true);
 	}
 
 	@Test
