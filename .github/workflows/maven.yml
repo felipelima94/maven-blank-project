@@ -15,15 +15,21 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
+      env: 
+        GITHUB_ACTOR: felipelima94
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build with Maven
+      env: 
+        GITHUB_ACTOR: felipelima94
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: mvn package
 
-    - name: Teste Sonar
-      run: mvn sonar:sonar
-          -Dsonar.host.url=${{ secrets.SONAR_URL }}
-          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}-${GITHUB_REF##*/}
-          -Dsonar.projectName=${{ secrets.SONAR_PROJECT_KEY }}-${GITHUB_REF##*/}
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-          -Dsonar.verbose=true
-          -Dsonar.tests=src/test
+    # - name: Teste Sonar
+    #   run: mvn sonar:sonar
+    #       -Dsonar.host.url=${{ secrets.SONAR_URL }}
+    #       -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}-${GITHUB_REF##*/}
+    #       -Dsonar.projectName=${{ secrets.SONAR_PROJECT_KEY }}-${GITHUB_REF##*/}
+    #       -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+    #       -Dsonar.verbose=true
+    #       -Dsonar.tests=src/test
