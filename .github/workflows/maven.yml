@@ -17,12 +17,12 @@ jobs:
         java-version: 11
       env: 
         GITHUB_ACTOR: felipelima94
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Build with Maven
       env: 
         GITHUB_ACTOR: felipelima94
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
       run: mvn package
 
     # - name: Teste Sonar
