@@ -28,11 +28,7 @@ jobs:
       run: |
         mkdir -p ~/.m2
         echo "<settings><servers><server><id>github</id><username>${GITHUB_ACTOR}</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml 
-        echo ${{github.actor}}
-        echo ${{ github.token }}
-        cat $GITHUB_WORKSPACE/settings.xml
-        echo ....
-        cat ~/.m2/settings.xml 
+        mvn clean package -s $GITHUB_WORKSPACE/settings.xml
 
     # - name: Teste Sonar
     #   run: mvn sonar:sonar
