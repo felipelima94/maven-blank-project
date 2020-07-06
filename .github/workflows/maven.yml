@@ -27,7 +27,6 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
       run: |
         cat $GITHUB_WORKSPACE/settings.xml
-        mvn package -s $GITHUB_WORKSPACE/settings.xml
 
     # - name: Teste Sonar
     #   run: mvn sonar:sonar
