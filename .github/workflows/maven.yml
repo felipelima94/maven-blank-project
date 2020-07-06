@@ -19,12 +19,12 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
       env: 
         GITHUB_ACTOR: felipelima94
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
 
     - name: Build with Maven
       env:
-        USERNAME: ${{github.actor}}
-        PASSWORD: ${{ secrets.TOKEN_GITHUB }}
+        GITHUB_ACTOR: ${{github.actor}}
+        GITHUB_TOKEN: ${{ github.token }}
       run: mvn package -s $GITHUB_WORKSPACE/settings.xml
 
     # - name: Teste Sonar
