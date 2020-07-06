@@ -20,10 +20,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build with Maven
-      env: 
-        GITHUB_ACTOR: felipelima94
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: mvn package -s ~/.m2/settings.xml
+      env:
+        USERNAME: ${{github.actor}}
+        PASSWORD: ${{ secrets.TOKEN_GITHUB }}
+      run: mvn install -s $GITHUB_WORKSPACE/settings.xml
 
     # - name: Teste Sonar
     #   run: mvn sonar:sonar
